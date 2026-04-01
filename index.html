@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7AM — Dating Without the Mask</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #0a0a0f;
+    color: #e4e4e7;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(99,102,241,0.08) 0%, transparent 50%);
+    animation: pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 1; }
+  }
+
+  .content { position: relative; z-index: 1; max-width: 680px; }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(99,102,241,0.15);
+    border: 1px solid rgba(99,102,241,0.3);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #818cf8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-size: clamp(42px, 8vw, 72px);
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: clamp(17px, 2.5vw, 21px);
+    line-height: 1.6;
+    color: #a1a1aa;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+    text-align: left;
+  }
+
+  @media (max-width: 600px) {
+    .features { grid-template-columns: 1fr; }
+  }
+
+  .feature {
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    transition: border-color 0.3s;
+  }
+
+  .feature:hover { border-color: rgba(99,102,241,0.3); }
+
+  .feature-icon {
+    width: 36px; height: 36px;
+    background: rgba(99,102,241,0.15);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+
+  .feature h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f4f4f5;
+    margin-bottom: 6px;
+  }
+
+  .feature p {
+    font-size: 13px;
+    color: #71717a;
+    line-height: 1.5;
+  }
+
+  .cta-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+  }
+
+  @media (max-width: 480px) {
+    .input-row { flex-direction: column; }
+  }
+
+  .cta-section input {
+    flex: 1;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .cta-section input:focus { border-color: #6366f1; }
+  .cta-section input::placeholder { color: #52525b; }
+
+  .cta-section button {
+    padding: 14px 28px;
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+  }
+
+  .cta-section button:hover { background: #4f46e5; }
+  .cta-section button:active { transform: scale(0.98); }
+
+  .cta-note {
+    font-size: 12px;
+    color: #52525b;
+  }
+
+  .counter {
+    margin-top: 24px;
+    padding: 10px 20px;
+    background: rgba(99,102,241,0.08);
+    border-radius: 100px;
+    font-size: 14px;
+    color: #a1a1aa;
+  }
+
+  .counter strong { color: #818cf8; }
+
+  .how-it-works {
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .how-it-works h2 {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 48px;
+    color: #f4f4f5;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 600px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+
+  .step {
+    padding: 32px 24px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px;
+  }
+
+  .step-num {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 18px; color: #fff;
+    margin: 0 auto 16px;
+  }
+
+  .step h3 { font-size: 16px; font-weight: 700; color: #f4f4f5; margin-bottom: 8px; }
+  .step p { font-size: 14px; color: #71717a; line-height: 1.6; }
+
+  .manifesto {
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .manifesto-box {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border: 1px solid rgba(99,102,241,0.2);
+    border-radius: 16px;
+    background: rgba(99,102,241,0.03);
+  }
+
+  .manifesto-box h2 { font-size: 24px; font-weight: 800; color: #f4f4f5; margin-bottom: 20px; }
+  .manifesto-box p { font-size: 15px; color: #a1a1aa; line-height: 1.8; margin-bottom: 12px; }
+  .manifesto-box p:last-child { margin-bottom: 0; }
+
+  .footer {
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #3f3f46;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .success-msg {
+    padding: 16px 24px;
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 10px;
+    color: #4ade80;
+    font-weight: 600;
+    font-size: 15px;
+    display: none;
+  }
+
+  .success-msg.show { display: block; }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="content">
+    <div class="badge">Coming Soon — Join the Waitlist</div>
+    <h1>7AM</h1>
+    <p class="subtitle">
+      The dating app that banned photos, filters, and fakeness.<br>
+      Video-only profiles. No edits. No uploads. Just you.<br>
+      <span style="color:#71717a;font-size:0.85em;">Because 7AM is when nobody's faking it.</span>
+    </p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🎥</div>
+        <h3>Video-Only Profiles</h3>
+        <p>3 clips, 30 seconds total. Face, body, and candid — recorded live in the app.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🚫</div>
+        <h3>Zero Filters</h3>
+        <p>AI-powered detection blocks every digital filter, smooth, and alteration.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🗣️</div>
+        <h3>Hear Their Voice</h3>
+        <p>Everyone reads a random script so you hear their real voice before matching.</p>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <div class="input-row">
+        <input type="email" id="emailInput" placeholder="your@email.com">
+        <button id="joinBtn" onclick="handleSignup()">Join Waitlist</button>
+      </div>
+      <div class="cta-note">Free. No spam. Just a heads up when we launch.</div>
+      <div class="success-msg" id="successMsg">
+        You're in! We'll let you know when UNFILTERED is ready.
+      </div>
+    </div>
+
+    <div class="counter">
+      <strong id="count">0</strong> people are tired of catfishing too
+    </div>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <h2>How It Works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Record 3 Clips</h3>
+      <p>A close-up of your face, a full-body shot in a standard outfit, and a candid moment — all recorded live.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>AI Verifies You</h3>
+      <p>Our system checks for filters, confirms you're a real person, and makes sure your profile is genuinely you.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Match for Real</h3>
+      <p>Browse video profiles. Hear their voice. See how they actually look. No surprises on the first date.</p>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto">
+  <div class="manifesto-box">
+    <h2>Our Belief</h2>
+    <p>Every other dating app lets you hide. Pick the right angle. Choose the perfect filter. Upload a photo from three years and thirty pounds ago.</p>
+    <p>We think that's broken.</p>
+    <p>7AM exists for people who are confident enough to show up as they actually are — and who want to meet someone else doing the same.</p>
+    <p><strong style="color:#818cf8">What you see is what you get.</strong></p>
+  </div>
+</section>
+
+<footer class="footer">
+  7AM — Built with radical honesty, open source, and zero VC money (so far)
+</footer>
+
+<script>
+  // Simple in-memory signup (replace with real backend later)
+  let signups = JSON.parse(sessionStorage.getItem('signups') || '[]');
+
+  function updateCount() {
+    document.getElementById('count').textContent = signups.length;
+  }
+
+  function handleSignup() {
+    const input = document.getElementById('emailInput');
+    const email = input.value.trim();
+    const btn = document.getElementById('joinBtn');
+    const msg = document.getElementById('successMsg');
+
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      input.style.borderColor = '#ef4444';
+      setTimeout(() => input.style.borderColor = 'rgba(255,255,255,0.1)', 2000);
+      return;
+    }
+
+    if (signups.includes(email)) {
+      msg.textContent = "You're already on the list!";
+      msg.classList.add('show');
+      return;
+    }
+
+    signups.push(email);
+    sessionStorage.setItem('signups', JSON.stringify(signups));
+    input.value = '';
+    msg.textContent = "You're in! We'll let you know when UNFILTERED is ready.";
+    msg.classList.add('show');
+    updateCount();
+
+    setTimeout(() => msg.classList.remove('show'), 4000);
+  }
+
+  document.getElementById('emailInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') handleSignup();
+  });
+
+  updateCount();
+</script>
+</body>
+</html>
